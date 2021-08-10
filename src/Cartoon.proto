@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+message Cartoon{
+  int32 Id                        = 1;
+  string name                     = 2;
+  string company                  = 3;
+  google.protobuf.Timestamp time  = 4;
+}
+
+message CartoonList{
+  repeated Cartoon cartoonList    = 1;          //CartoonList
+}
+
+
+message CartoonRequest{
+  int32 query                     = 1;          //命令码 1->add 2->selectById 3->selectAll
+  CartoonList cartoon             = 2;          //add 时一个Cartoon list, 默认放在  CartoonInf  文件中
+  int32 selectById                = 3;          //select 时 Cartoon的Id
+  bool selectAll                  = 4;          //查询所有的 Cartoon
+}
+
+message CartoonResponse{
+  string res                      = 1;
+  CartoonList cartoon             = 2;          //返回的 select Cartoon的信息
+}
